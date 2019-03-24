@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  
+  <head>
+    
+    <title>dashboard</title>
+    <link rel="stylesheet" href="dashboard-style.css">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard-style.css') }}">
+  </head>
+  
+  <body>
+    <header id="top" class="main-header">
+      <h1>dashboard</h1>
+      <span class="title">your guide to a healthier self</span>
+    </header>
+    
+    <p>search any food product and we will do our best to beam them up</p>
+    <p>foods are rated on a score from 1-10, with 10 being the worst and 1 being the best</p>
+    
+    <form id="search-form" method="POST" action="/search">
+      <div class="search">
+        <input type="text" required="true" name="query"/>
+        <input type="submit" class="corner" value="" />
+      </div>
+    </form>
+  
+  <h2>Your Foods</h2>
+  {% for food in data %}
+    <div class="card">
+      <h3>{{ food['name'] }}</h3>
+      <h4>Food Healthiness Score: {{ food['score'] }}</h4>
+      <p>Serving size: {{ food['serving'] }}</p>
+      <p>Calories per serving: {{ food['calories'] }}</p>
+      <p>Ingredients: {{ food['ingredients'] }}</p>
+      <a href="{{ food['link'] }}">Link on EWG</a>
+    </div>
+  {% endfor %}
+
+  <h2>Your average score: {{ avgscore }}</h2>
+
+  </body>
+  
+  <footer class="main-footer">
+    <p>an apple a day</p>
+    <a class="back-to-top" href="#top">back to top &raquo;</a>
+  </footer>
+  
+</html>
